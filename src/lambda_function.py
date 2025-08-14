@@ -1,18 +1,9 @@
-import json
+from src.lambda_function import lambda_handler
+import types
 
-def lambda_handler(event, context):
-    # TODO implement
-    return {
-        'statusCode': 200,
-        'body': json.dumps('Hello from Lambda! From Github Action!')
-    }
-
-
-
-
-def new_function(event, context):
-    # TODO implement
-    return {
-        'statusCode': 200,
-        'body': json.dumps('Hello from Lambda!')
-    }
+def test_lambda_handler_runs():
+    event = {}
+    context = types.SimpleNamespace(function_name="test")
+    result = lambda_handler(event, context)
+    assert result is not None
+    assert result['statusCode'] == 200
