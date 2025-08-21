@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          echo "✅ Tests passed!"  # (replace later with pytest if needed)
+          echo "Tests passed!"  # (replace later with pytest if needed)
 
       - name: Zip Lambda code
         run: |
