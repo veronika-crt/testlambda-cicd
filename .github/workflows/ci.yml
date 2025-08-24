@@ -27,6 +27,14 @@ jobs:
           export PYTHONPATH=$PYTHONPATH:$(pwd)/src
           pytest tests/test_lambda.py --maxfail=1 --disable-warnings -q
 
+      - name: Run Bandit security scan (SAST)
+        run: |
+          bandit -r src
+
+      - name: Run safety dependency check
+        run: |
+          safety check --full-report -r requirements.txt
+
       - name: Zip Lambda code
         run: |
           cd src
