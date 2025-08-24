@@ -5,6 +5,7 @@ def lambda_handler(event, context):
     }
 
 
+
 import json
 
 def greet_handler(event, context):
@@ -13,3 +14,4 @@ def greet_handler(event, context):
         "statusCode": 200,
         "body": json.dumps(f"Hello {name}, welcome to AWS Lambda!")
     }
+

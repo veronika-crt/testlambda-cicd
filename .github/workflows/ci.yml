@@ -22,9 +22,9 @@ jobs:
         run: |
           pip install -r requirements.txt || true
 
-      - name: Run Tests
+      - name: Run Smoke/Sanity Tests
         run: |
-          echo "Tests passed!"  # (replace later with pytest if needed)
+          pytest tests/test_lambda.py --maxfail=1 --disable-warnings -q
 
       - name: Zip Lambda code
         run: |
