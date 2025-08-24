@@ -30,3 +30,27 @@ def test_greet_handler_body():
     context = types.SimpleNamespace(function_name="test")
     result = lambda_function.greet_handler(event, context)
     assert "Veronika" in result["body"]
+
+
+# Regression Tests
+def test_greet_handler_default_name():
+    """Regression: greet_handler should default to 'Guest' if no name provided"""
+    event = {}
+    context = types.SimpleNamespace(function_name="test")
+    result = lambda_function.greet_handler(event, context)
+    assert "Guest" in result["body"]
+
+def test_lambda_handler_unexpected_event():
+    """Regression: lambda_handler should handle unexpected event keys gracefully"""
+    event = {"unexpected": "value"}
+    context = types.SimpleNamespace(function_name="test")
+    result = lambda_function.lambda_handler(event, context)
+    assert result["statusCode"] == 200
+    assert "Hello from Lambda!" in result["body"]
+
+def test_greet_handler_non_string_name():
+    """Regression: greet_handler should handle non-string name values"""
+    event = {"name": 12345}
+    context = types.SimpleNamespace(function_name="test")
+    result = lambda_function.greet_handler(event, context)
+    assert "12345" in result["body"]
