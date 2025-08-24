@@ -24,6 +24,7 @@ jobs:
 
       - name: Run Smoke/Sanity Tests
         run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/src
           pytest tests/test_lambda.py --maxfail=1 --disable-warnings -q
 
       - name: Zip Lambda code
